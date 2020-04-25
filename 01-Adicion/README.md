@@ -1,5 +1,10 @@
 <!--HEAD -->
 # Adicion.
+
+### Bienvenido a este README.
+### En este ejercicio vamos a pedir 2 variables al usuario, las vamos a guardar en las variables, ValorA y ValoeB.
+### Luego vamos a devolver por pantalla la suma de ambas variables.
+### En el siguiente cuadro modelo IPO se puede apreciar las entradas y salidas, y el proceso que lleva el programa.
 |     INPUTS       |      PROCESS      |      OUTPUTS     |
 | ---------------- |:-----------------:| ----------------:|
 |      ValorA      |-Declarar variables| ValorA + ValorB  |
