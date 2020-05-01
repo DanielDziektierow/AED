@@ -10,7 +10,6 @@ En este ejercicio vamos a pedir 2 numeros enteros al usuario que debera ingresar
 Luego vamos a devolver por pantalla la suma de ambas variables.
 
 # Modelo IPO
-En el siguiente cuadro modelo IPO se puede apreciar las entradas y salidas, y el proceso que lleva el programa.
 
 ![Imagen de modelo IPO](https://user-images.githubusercontent.com/48501354/80809974-35f92900-8b99-11ea-9e9d-ac19eb4bb76b.jpg "Modelo IPO")
 
