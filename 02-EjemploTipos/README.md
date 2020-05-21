@@ -29,7 +29,13 @@ Justifique.
 ![Imagen de modelo IPO](https://user-images.githubusercontent.com/48501354/82489131-7f150c80-9ab7-11ea-93c8-33781b226afc.png "Modelo IPO")
 
 # Etapa # 2 Diseño de la Solución
-* **Léxico del Algoritmo:**  Pregunta1,Pregunta2 ∈.. ; Carac,Carac2 ∈ ASCII; NumPos ∈ N; NumDouble ∈ R; str ∈ ASCII
+* **Léxico del Algoritmo:**  
+
+* Pregunta1,Pregunta2 ∈ bool
+* Carac,Carac2 ∈ char
+* NumPos ∈ Unsigned Int
+* NumDouble ∈ Double
+* str ∈ Cadena de caracteres
 
 ## __Representacion textual__
 Inicio
