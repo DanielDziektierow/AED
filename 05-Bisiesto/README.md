@@ -39,6 +39,11 @@ assert(Bisiesto(1600));
     * bool Bisiesto(unsigned);
 
 * **Definiciones**
-    *  
+    *  Bisiesto(x)=  x< 1582 False
+
+                     x/4 + x/100 + x/400 = 0 True
+                     
+                     otro False
 
 * **Arbol**
+![Imagen de Arbol](https://user-images.githubusercontent.com/48501354/84184487-d299cb00-aa63-11ea-902a-2578808856f4.jpg "Arbol")

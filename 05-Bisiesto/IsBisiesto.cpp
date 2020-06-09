@@ -1,3 +1,10 @@
+/*Materia: Algoritmos y Estructura de Datos
+*Curso: K1051
+*Año y Cuatrimestre: 2020 1er Cuat.
+*Legajo: 1599872
+*Apellido: Dziektierow
+*Nombre: Daniel
+*/
 #include <cassert>
 
 bool Bisiesto(unsigned);
