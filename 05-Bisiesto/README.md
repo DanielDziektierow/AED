@@ -20,7 +20,7 @@ Definir una funcion que me devuelva un TRUE si es anio bisiesto.
 
 # Etapa # 2 Diseño de la Solución
 * **Léxico del Algoritmo:**
-    * anio ϵ N 
+    * Bisiesto: N -> B
 ----------------------------------
 * **Pruebas:**
 int main()
@@ -46,4 +46,4 @@ assert(Bisiesto(1600));
                      otro False
 
 * **Arbol**
-![Imagen de Arbol](https://user-images.githubusercontent.com/48501354/84184487-d299cb00-aa63-11ea-902a-2578808856f4.jpg "Arbol")
+![Imagen de Arbol](https://user-images.githubusercontent.com/48501354/84328243-d1e26100-ab57-11ea-99bc-b3a87017a561.jpg "Arbol")
