@@ -20,7 +20,7 @@ Definir una funcion que me devuelva un TRUE si es anio bisiesto.
 
 # Etapa # 2 Diseño de la Solución
 * **Léxico del Algoritmo:**
-    * Bisiesto: N -> B
+    * Bisiesto: N -> B  ||| a^((l ^ k) U c) 
 ----------------------------------
 * **Pruebas:**
 int main()
@@ -41,9 +41,9 @@ assert(Bisiesto(1600));
 * **Definiciones**
     *  Bisiesto(x)=  x< 1582 False
 
-                     x/4 + x/100 + x/400 = 0 True
+                     x%4 * (x%100 + x%400) = 0 True
                      
                      otro False
 
 * **Arbol**
-![Imagen de Arbol](https://user-images.githubusercontent.com/48501354/84328243-d1e26100-ab57-11ea-99bc-b3a87017a561.jpg "Arbol")
+![Imagen de Arbol](https://user-images.githubusercontent.com/48501354/84339048-f9472700-ab73-11ea-8020-3691990392a2.jpg "Arbol")
