@@ -21,6 +21,10 @@ Definir una funcion que me devuelva un TRUE si es anio bisiesto.
 # Etapa # 2 Diseño de la Solución
 * **Léxico del Algoritmo:**
     * Bisiesto: N -> B  ||| a^((l ^ k) U c) 
+    a: x>=1582
+    l: x%100 =0
+    k: x%400 =0
+    c: x%4 = 0
 ----------------------------------
 * **Pruebas:**
 int main()
