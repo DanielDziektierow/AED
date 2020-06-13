@@ -46,4 +46,4 @@ assert(Bisiesto(1600));
                      otro False
 
 * **Arbol**
-![Imagen de Arbol](https://user-images.githubusercontent.com/48501354/84339048-f9472700-ab73-11ea-8020-3691990392a2.jpg "Arbol")
+![Imagen de Arbol](https://user-images.githubusercontent.com/48501354/84572831-19910480-ad73-11ea-99d6-dea0cf916b0b.jpg "Arbol")
