@@ -7,17 +7,19 @@
 */
 #include <cassert>
 
-bool Bisiesto(unsigned);
+//Declaraciones
+bool IsBisiesto(unsigned);
 
 int main(){
-	assert(Bisiesto(2020));
-	assert(Bisiesto(2400));
-	assert(Bisiesto(2000));
-	assert(Bisiesto(1600));
+	assert(IsBisiesto(2020));
+	assert(IsBisiesto(2400));
+	assert(IsBisiesto(2000));
+	assert(IsBisiesto(1600));
 }
 
-bool Bisiesto(unsigned anio){
-	return  anio>=1582 and (anio%4==0 or (anio%100 == 0 and anio%400 == 0));
+//Funciones
+bool IsBisiesto(unsigned anio){
+	return  anio>=1582 and ((anio%4==0 and anio%100 != 0) or anio%400 == 0);
 }
 //a^(c u (l ^ k)) 
 //Link de la info:
