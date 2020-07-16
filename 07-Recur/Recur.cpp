@@ -5,31 +5,35 @@
 *Apellido: Dziektierow
 *Nombre: Daniel
 */
+
 //Bibliotecas
 #include <cassert>
 
-//Declaraciones
-int Div(int, unsigned);
-int Mcd(int, int);
+//Prototipos o declaraciones
+unsigned Div(unsigned, unsigned);
+unsigned Mcd(unsigned, unsigned);
 double Fact(int);			
 int Fib(int);
 
 int main (){
 	int n=5;
+	unsigned u1=40, u2=30;
 	assert(Fact(n) == 120);
 	assert(Fib(n) == 5);
+	assert(Mcd(u1, u2) == 10);
+	assert(Div(u1, u2) == 1);
 	return 0;
 }
 
 //Definiciones
-/*int Div(int n, unsigned div){
-	return 0;
+unsigned Div(unsigned dividendo, unsigned divisor){
+	return dividendo >= divisor and divisor != 0 ? 1+ Div(dividendo - divisor, divisor) : 0;
 }
 
-int Mcd(int n1, int n2){
-	n1%2? n1=n1/2 : 
+unsigned Mcd(unsigned n1, unsigned n2){
+	return n2 == 0 ? n1 : Mcd(n2, n1 % n2);
 }
-*/
+
 double Fact(int n){
 	return n!=0 ? n* Fact(n-1) :  1; 
 }
