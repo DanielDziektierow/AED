@@ -1,6 +1,6 @@
 /*Materia: Algoritmos y Estructura de Datos
 *Curso: K1051
-*Año y Cuatrimestre: 2020 1er Cuat.
+*Anio y Cuatrimestre: 2020 1er Cuat.
 *Legajo: 1599872
 *Apellido: Dziektierow
 *Nombre: Daniel
@@ -20,10 +20,11 @@ int main (){
 	AgregarPtospol(pol);
 	AgregarColorpol(pol);
 	
-	assert(ta.trp.at(0).x==1);
+//	assert(ta.trp.at(0).x==1);
 //	assert(ta.color.at(1)=="azul");
-	assert(pol.npto.at(0).x==1);
+//	assert(pol.npto.at(0).x==1);
 //	assert(pol.color.at(0)=="cian");
+//	MostrarTri(ta);
 }
 
 //Funciones
@@ -76,3 +77,7 @@ void AgregarColorpol(Poligono &p){
 		i++;	
 	};
 }
+
+void MostrarTri(const Triangulo &t){
+	cout<<t.trp[0].x<<endl;
+};

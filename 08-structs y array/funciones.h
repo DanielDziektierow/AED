@@ -5,12 +5,17 @@
 
 using namespace std;
 
+//const
+const unsigned MAX=3;
+const unsigned MAX_PTOS=10;
+const unsigned MAX_COLOR=4;
+
 //declaro structs
 struct Punto{double x, y;};
 
-using TriPtos =std::array<Punto,3>;
-using Colores= std::array <string,4>;
-using nPtos= std::array<Punto,10>;
+using TriPtos =std::array<Punto,MAX>;
+using Colores= std::array <string,MAX_COLOR>;
+using nPtos= std::array<Punto,MAX_PTOS>;
 
 struct Triangulo{
 	TriPtos trp; 
@@ -28,3 +33,7 @@ void AgregarColortri(Triangulo &);
 void AgregarPtospol(Poligono &);
 void AgregarColorpol(Poligono &);
 
+void MostrarTri(const Triangulo &);
+void MostrarColorTri(const Triangulo &);
+void MostrarPol(const Poligono &);
+void MostrarColorPol(const Poligono &);
