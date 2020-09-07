@@ -18,15 +18,37 @@ string DecaHex(unsigned n);
 
 
 int main(){
-	Color c1={222,111,123};
-	Color c2={10,10,10};
+	Color c1={252,111,123}, c2={10,10,10}, comp;
+	string hexa="", rgb="";
+	
+	c1=Mezclar(c1,c2);
+	hexa=GetHtmlHex(c1);
+	rgb=GetHtmlRGB(c1);
+	comp=GetComplementario(c1);
+	
+	assert(c1.col.at(0) == 127);
+	assert(c1.col.at(1) == 60);
+	assert(c1.col.at(2) == 66);
+	
+	assert(hexa == "#7F3C42");
+	assert(rgb=="RGB(127,60,66)");
+	
+	assert(comp.col.at(0)==128);
+	assert(comp.col.at(1)==195);
+	assert(comp.col.at(2)==189);
+	
 }
 
+//Declaraciones
 Color Mezclar(Color &c1, Color &c2){
 	Color aux={0,0,0};
 	unsigned i=0;
 	while(i<3){
 		aux.col.at(i)=c1.col.at(i) + c2.col.at(i);
+		if(unsigned(c1.col.at(i)) + unsigned(c2.col.at(i)) >255){
+			aux.col.at(i)=255;
+		}
+		aux.col.at(i)=aux.col.at(i)/2;
 		i++;
 	}
 	return aux;
@@ -126,6 +148,26 @@ Color GetComplementario(const Color &c){
 	Color aux;
 	while(i<3){
 		aux.col.at(i)=255 - unsigned(c.col.at(i));
+		i++;
+	}
+	return aux;
+}
+
+Color Sumar(Color &c1, Color &c2){
+	Color aux;
+	unsigned i=0;
+	while(i<3){
+		aux.col.at(i)=c1.col.at(i) + c2.col.at(i);
+		i++;
+	}
+	return aux;
+}
+
+Color Restar(Color &c1, Color &c2){
+	Color aux;
+	unsigned i=0;
+	while(i<3){
+		aux.col.at(i)=c1.col.at(i) - c2.col.at(i);
 		i++;
 	}
 	return aux;
