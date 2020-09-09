@@ -10,17 +10,17 @@
 
 //Main
 int main (){
-	unsigned cant=5;
-	Punto test;
+	unsigned ultimo_vertice=4;
+	Punto test={99,99};
 	Poligono pol;
+	pol.nvertices=4;
 	
-	SetVertice(pol,cant);
-	test=GetVertice(pol, 4);
-	
+	SetVertice(pol,pol.nvertices);
+	AddVertice(pol,test);
+	test=GetVertice(pol, pol.nvertices);	//posicion de array
 	//assert(test.x == 4);
+	//cout<<endl<<unsigned(test.x)<<endl;
 	
-	
-	//AddVertice(pol, {99,99});
 	return 0;
 }
 
