@@ -11,6 +11,7 @@
 #include <string>
 #include <array>
 #include <cstdint>
+#include <fstream>
 
 using namespace std;
 //const
@@ -42,6 +43,7 @@ Color Sumar(Color &, Color &);
 Color Restar(Color &, Color &);
 Color GetComplementario(const Color &);
 string DecaHex(unsigned n);
+void CrearSvgConTextoEscritoEnAltoContraste(string , string , const Color& );
 
 //Funcioned
 Color Mezclar(Color &c1, Color &c2){
@@ -176,6 +178,17 @@ Color Restar(Color &c1, Color &c2){
 	}
 	return aux;
 }
+
+void CrearSvgConTextoEscritoEnAltoContraste(string nombre, string mensaje, const Color& c){
+std::ofstream file;
+file.open(nombre + ".svg");
+file << "<svg xmlns='http://www.w3.org/2000/svg'>\n";
+file << "<rect x='0' y='0' height='100' width='500' style='fill: " << GetHtmlHex(GetComplementario(c)) << "'/> \n";
+file << "<text x='5' y='18' style='fill: " << GetHtmlRGB(c) << ";background-color: "<<GetHtmlHex(GetComplementario(c)) <<"#ff0000'>\n";
+file << mensaje << "\n";
+file << "</text>\n</svg>\n";
+file.close();
+};
 
 
 
