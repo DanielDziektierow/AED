@@ -19,6 +19,7 @@ calificador const para que no puedan modificarse.
 
 - **Hipotesis del problema**
 Para armar la estructura de Color tenemos 2 posibilidades, armar una estructura de 3 variables con el mismo tipo de dato o armar un array. En nuestro caso vamos a elegir un array. Para el tipo de dato tambien tenemos 2 posibilidades, uint8_t o unsigned char. En nuestro caso vamos a tomar uint8_t.
+A la hora de construir la funcion Sumar se tuvo en cuenta que al sobrepasar el valor 255 se iniciara nuevamente de 0.
 
 <!-- - **Modelo IPO**
 ![Imagen de modelo IPO](https://user-images.githubusercontent.com/48501354/87234896-dfd00f80-c3ab-11ea-8d90-c0f7b918c764.jpg "Modelo IPO")
@@ -26,14 +27,16 @@ Para armar la estructura de Color tenemos 2 posibilidades, armar una estructura 
 
 # Etapa # 2 Diseño de la Solución
 * **Léxico del Algoritmo:** 
-    * Mezclar: [Color]* X [Color]* --> Color
-    * GetHtmlHex: [Color]* --> E*
-    * GetHtmlRGB: [Color]* --> E*
-    * Sumar: [Color]* X [Color]* --> Color
-    * Restar: [Color]* X [Color]* --> Color
-    * GetComplementario: [Color *]* --> Color
-    * DecaHex: N --> E*
+
+<!--Color ∈ { {a,b,c} uint8_t / {a,b,c} ∈ [0,255]}; uint8_t ∈ [0,255];-->
+    * Mezclar: [Color]* X [Color]* --> Color  <!-- Entran 2 referencias de un Color y sale un Color -->
+    * GetHtmlHex: [Color]* --> E*			  <!-- Entra 1 referencia de un Color y sale un String -->
+    * GetHtmlRGB: [Color]* --> E*			  <!-- Entran 1 referencia de un Color y sale un String -->
+    * Sumar: [Color]* X [Color]* --> Color	  <!-- Entran 2 referencias de un Color y sale un Color -->
+    * Restar: [Color]* X [Color]* --> Color	  <!-- Entran 2 referencias de un Color y sale un Color -->
+    * GetComplementario: [Color *]* --> Color <!-- Entra 1 referencia constante de un Color y sale un Color -->					
     * CrearSvgConTextoEscritoEnAltoContraste: E* X E* X [Color *]*
+	<!-- Entran 2 Strings y una referencia constante de Color, y no devuelve nada -->
       
 ----------------------------------
 * **Prototipos**
@@ -43,7 +46,6 @@ Para armar la estructura de Color tenemos 2 posibilidades, armar una estructura 
     * Color Sumar(Color &, Color &);
     * Color Restar(Color &, Color &);
     * Color GetComplementario(const Color &);
-    * string DecaHex(unsigned n);
     * void CrearSvgConTextoEscritoEnAltoContraste(string , string , const Color& );
 
 * **Definiciones**
@@ -68,67 +70,6 @@ Para armar la estructura de Color tenemos 2 posibilidades, armar una estructura 
 		i++;
 	}	
 	aux= "#" + aux ;
-	return aux;
-
-    * string DecaHex(unsigned n){
-	string aux, aux2;
-	if(n<16){
-			switch(n){
-				case 0:
-					aux="0";
-				break;
-				case 1:
-					aux="1";
-				break;
-				case 2:
-					aux="2";
-				break;
-				case 3:
-					aux="3";
-				break;
-				case 4:
-					aux="4";
-				break;
-				case 5:
-					aux="5";
-				break;
-				case 6:
-					aux="6";
-				break;
-				case 7:
-					aux="7";
-				break;
-				case 8:
-					aux="8";
-				break;
-				case 9:
-					aux="9";
-				break;
-				case 10:
-					aux="A";
-				break;
-				case 11:
-					aux="B";
-				break;
-				case 12:
-					aux="C";
-				break;
-				case 13:
-					aux="D";
-				break;
-				case 14:
-					aux="E";
-				break;
-				case 15:
-					aux="F";
-				break;
-			}
-	}
-	else{
-		aux= DecaHex(n/16) ;
-		aux2=DecaHex(n%16);
-		aux=aux + aux2;
-	}
 	return aux;
 
     * string GetHtmlRGB(const Color &c){
