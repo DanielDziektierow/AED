@@ -28,10 +28,11 @@ A la hora de construir la funcion Sumar se tuvo en cuenta que al sobrepasar el v
 # Etapa # 2 Diseño de la Solución
 * **Léxico del Algoritmo:** 
 
-<!--Color ∈ { {a,b,c} uint8_t / {a,b,c} ∈ [0,255]}; uint8_t ∈ [0,255];-->
-    * Mezclar: [Color]* X [Color]* --> Color  <!-- Entran 2 referencias de un Color y sale un Color -->
+<Color ∈ { {c.0, c.1, c.2} uint8_t / {a,b,c} ∈ [0,255]}; uint8_t ∈ [0,255]; 
+    * Mezclar: [Color]* X [Color]* --> Color / {Mezclar(c1, c2)= (c1 + c2)/ 2} c1,c2  ∈ [0,255]
+	<!-- Entran 2 referencias de un Color y sale un Color -->
     * GetHtmlHex: [Color]* --> E*			  <!-- Entra 1 referencia de un Color y sale un String -->
-    * GetHtmlRGB: [Color]* --> E*			  <!-- Entran 1 referencia de un Color y sale un String -->
+    * GetHtmlRGB: [Color]* --> E*			  <!-- Entra 1 referencia de un Color y sale un String -->
     * Sumar: [Color]* X [Color]* --> Color	  <!-- Entran 2 referencias de un Color y sale un Color -->
     * Restar: [Color]* X [Color]* --> Color	  <!-- Entran 2 referencias de un Color y sale un Color -->
     * GetComplementario: [Color *]* --> Color <!-- Entra 1 referencia constante de un Color y sale un Color -->					
