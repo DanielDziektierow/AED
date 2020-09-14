@@ -52,14 +52,14 @@ void MostrarColorPol(const Poligono &);
 
 //funciones
 void AgregarColorpol(Poligono &p, Color c){
-	p.colr=c;
+	p.colr=c.col;
 }
 
 void MostrarColorPol(const Poligono &){
 	cout<<GetHtmlRGB(p.colr);
 }
 
-int GetPhi(Punto p1, Punto p2){
+/*int GetPhi(Punto p1, Punto p2){
 	int disty, distx,phi, hip;
 	disty=p2.y-p1.y;
 	distx=p2.x-p1.x;
@@ -67,6 +67,7 @@ int GetPhi(Punto p1, Punto p2){
 	sin(phi)=(p2.y-p1.y)/ hip;
 	return phi;
 }
+*/
 
 int GetHip(int cat1, int cat2){
 	int hip;
@@ -102,7 +103,7 @@ void SetVertice(Poligono &p, unsigned cant){
 }
 
 unsigned GetCantidadLados(const Poligono &p){
-	return p.nvertices+1;
+	return p.nvertices+1;			//ya que el array comienza en 0
 }
 
 void RemoveVertice(Poligono p){
