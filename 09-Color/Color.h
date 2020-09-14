@@ -44,6 +44,7 @@ Color Restar(Color &, Color &);
 Color GetComplementario(const Color &);
 string DecaHex(unsigned n);
 void CrearSvgConTextoEscritoEnAltoContraste(string , string , const Color& );
+bool isIgual(const Color &c1, const Color &c2);
 
 //Funcioned
 Color Mezclar(Color &c1, Color &c2){
@@ -190,7 +191,18 @@ file << "</text>\n</svg>\n";
 file.close();
 };
 
-
+bool isIgual(const Color &c1, const Color &c2){
+	if(c1.col.at(0) == c2.col.at(0) ){
+		if(c1.col.at(1) == c2.col.at(1) ){
+			if(c1.col.at(2) == c2.col.at(2) ){
+				return true;
+			}
+			else return false;
+		}
+		else return false;
+	}
+	else return false;
+}
 
 
 
