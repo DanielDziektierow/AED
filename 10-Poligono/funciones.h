@@ -18,7 +18,6 @@ using namespace std;
 //const
 const unsigned MAX=3;
 const unsigned MAX_PTOS=10;
-const unsigned MAX_COLOR=2;
 
 //declaro structs
 struct Punto{
@@ -30,14 +29,14 @@ using nPtos= std::array<Punto,MAX_PTOS>;
 struct Poligono{
 	unsigned nvertices;
 	nPtos npto;
-	Colores colr;
+	Color colr;
 	};
 	
 
 //Prototipos
 
 int GetPhi(Punto , Punto );
-int GetHip(int, int);
+unsigned GetHip(unsigned, unsigned);
 
 void SetVertice(Poligono &, unsigned);
 Punto GetVertice(const Poligono &, unsigned);
@@ -52,10 +51,10 @@ void MostrarColorPol(const Poligono &);
 
 //funciones
 void AgregarColorpol(Poligono &p, Color c){
-	p.colr=c.col;
+	p.colr.col=c.col;
 }
 
-void MostrarColorPol(const Poligono &){
+void MostrarColorPol(const Poligono &p){
 	cout<<GetHtmlRGB(p.colr);
 }
 
@@ -69,9 +68,11 @@ void MostrarColorPol(const Poligono &){
 }
 */
 
-int GetHip(int cat1, int cat2){
-	int hip;
-	hip=pow(cat1,2)+pow(cat2,2);
+unsigned GetHip(Punto cat1, Punto cat2){
+	unsigned hip, aux_x, aux_y;
+	aux_x=cat2.x-cat1.x;
+	aux_y=cat2.y-cat1.y;
+	hip=pow(aux_x,2)+pow(aux_y,2);
 	return hip;
 }
 
@@ -118,7 +119,7 @@ int GetPerimetro(const Poligono &p){
 		i++;
 	}
 	if(i == p.nvertices){
-		per= per+ GetHip(p.npto.at(i), p.npto(0));
+		per= per+ GetHip(p.npto.at(i), p.npto.at(0));
 	}
 	return per;
 }

@@ -24,18 +24,4 @@ int main (){
 	return 0;
 }
 
-//Funciones
-
-
-
-/*void AgregarColorpol(Poligono &p){
-	unsigned i=0;
-	string aux="";
-	while(i<6 and aux!="0"){
-		cout<<"color "<<i<<" (0 para salir)"<<endl;
-		cin>>aux;
-		p.colr.at(i)={aux};
-		i++;	
-	};
-}*/
 
