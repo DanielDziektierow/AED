@@ -1,8 +1,11 @@
-09-Color: 09-Color.o
-	g++ 09-Color.o 09-Color
+test: ColorTest.o Color.o
+	g++ ColorTest.o Color.o -o test
 
-09-Color.o: 09-Color.cpp
-	g++ -c 09-Color.cpp
+ColorTest.o: ColorTest.cpp
+	g++ -c ColorTest.cpp
+
+Color.o: Color.cpp
+	g++ -c Color.cpp
 
 clean:
-	rm *.o 09-Color
+	rm *.o Color
