@@ -85,12 +85,13 @@ void RemoveVertice(Poligono p){
 	p.nvertices= p.nvertices -1;
 }
 
-int GetPerimetro(const Poligono &p){
+int GetPerimetro(const Poligono & p){
 	unsigned i=0, j=i+1;
 	int per=0;
 	while(i < p.nvertices){
 		per=GetHip(p.npto.at(i),p.npto.at(j));
 		i++;
+		j++;
 	}
 	if(i == p.nvertices){
 		per= per+ GetHip(p.npto.at(i), p.npto.at(0));
