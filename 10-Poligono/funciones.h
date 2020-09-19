@@ -10,7 +10,7 @@
 #include <cassert>
 #include <string>
 #include <array>
-#include <cmath>
+#include "11-Punto/Punto.h"
 #include "Color.h"
 
 using namespace std;
@@ -20,10 +20,6 @@ const unsigned MAX=3;
 const unsigned MAX_PTOS=10;
 
 //declaro structs
-struct Punto{
-	double x, y;
-};
-
 using nPtos= std::array<Punto,MAX_PTOS>;
 
 struct Poligono{
@@ -35,9 +31,6 @@ struct Poligono{
 
 //Prototipos
 
-int GetPhi(Punto , Punto );
-unsigned GetHip(unsigned, unsigned);
-
 void SetVertice(Poligono &, unsigned);
 Punto GetVertice(const Poligono &, unsigned);
 void AddVertice(Poligono &, Punto);
@@ -46,7 +39,6 @@ unsigned GetCantidadLados(const Poligono &);
 int GetPerimetro(const Poligono &);
 
 void AgregarColorpol(Poligono &);
-
 void MostrarColorPol(const Poligono &);
 
 //funciones
@@ -56,24 +48,6 @@ void AgregarColorpol(Poligono &p, Color c){
 
 void MostrarColorPol(const Poligono &p){
 	cout<<GetHtmlRGB(p.colr);
-}
-
-/*int GetPhi(Punto p1, Punto p2){
-	int disty, distx,phi, hip;
-	disty=p2.y-p1.y;
-	distx=p2.x-p1.x;
-	hip= GetHip(disty,distx);
-	sin(phi)=(p2.y-p1.y)/ hip;
-	return phi;
-}
-*/
-
-unsigned GetHip(Punto cat1, Punto cat2){
-	unsigned hip, aux_x, aux_y;
-	aux_x=cat2.x-cat1.x;
-	aux_y=cat2.y-cat1.y;
-	hip=pow(aux_x,2)+pow(aux_y,2);
-	return hip;
 }
 
 void AddVertice(Poligono &pol, Punto p){
