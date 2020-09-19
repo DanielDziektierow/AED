@@ -1,11 +1,13 @@
-test: ColorTest.o Color.o
-	g++ ColorTest.o Color.o -o test
+.PHONY= test clean
 
-ColorTest.o: ColorTest.cpp
-	g++ -c ColorTest.cpp
+test: ColorTest
+	./ColorTest
 
-Color.o: Color.cpp
-	g++ -c Color.cpp
+ColorTest: ColorTest.cpp Color.o Color.h
+	$(CXX) $(CXXFLAGS) ColorTest.cpp Color.o -o ColorTest
+
+Color.o: Color.cpp Color.h
+	$(CXX) $(CXXFLAGS) -c Color.cpp -o Color.o
 
 clean:
-	rm *.o Color
+	-rm -f ColorTest Color.o
