@@ -18,27 +18,27 @@ using namespace std;
 #define PI 3.14159265
 
 struct Punto{
-	int x, y;
+	float x, y;
 };
 
 //Prototipos
 
-int GetPhi(Punto , Punto);
-int GetRho(Punto, Punto);
-unsigned GetCuadrante(Punto);
+//int GetPhi(Punto , Punto);
+//int GetRho(Punto, Punto);
+//unsigned GetCuadrante(Punto);
 //GetEje();
 //GetSemiPlano();
-unsigned GetHip(int, int);
+float GetHip(Punto, Punto);
 void MoverPunto(Punto &, int, int);
 
 //funciones
 
-unsigned GetHip(int distx, int disty){
-	unsigned hip, aux_x, aux_y;
-	hip=pow(distx,2)+pow(disty,2);
+float GetHip(Punto primer, Punto segundo){
+	double hip;
+	hip=sqrt(pow((segundo.x - primer.x),2)+pow((segundo.y - primer.y),2));
 	return hip;
 }
-
+/*
 int GetPhi(Punto p1, Punto p2){		//Respecto del origen
 	unsigned dist1, dist2;
 	dist1= GetHip(p1.x, p1.y);
@@ -59,7 +59,7 @@ unsigned GetCuadrante(Punto p){
 	if (p.x<0 and p.y<0) return 3;
 	if (p.x>0 and p.y<0) return 4;
 }
-
+*/
 void MoverPunto(Punto & p, int x, int y){
 	p.x=p.x + x;
 	p.y= p.y + y;
