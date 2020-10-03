@@ -10,7 +10,7 @@
 #include <cassert>
 #include <string>
 #include <array>
-#include "11-Punto/Punto.h"
+#include "C:\Users\DanielDziektierow\Documents\AED\11-Punto\Punto.h"
 #include "Color.h"
 
 using namespace std;
@@ -34,9 +34,9 @@ struct Poligono{
 void SetVertice(Poligono &, unsigned);
 Punto GetVertice(const Poligono &, unsigned);
 void AddVertice(Poligono &, Punto);
-void RemoveVertice(Poligono);
+void RemoveVertice(Poligono&);
 unsigned GetCantidadLados(const Poligono &); 
-int GetPerimetro(const Poligono &);
+float GetPerimetro(const Poligono &);
 
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
@@ -63,13 +63,13 @@ Punto GetVertice(const Poligono &p, unsigned v){
 
 void SetVertice(Poligono &p, unsigned cant){
 	unsigned i=0;
-	double x,y;
-	cout<<"Poligono:"<<endl;
+	float x,y;
+	//cout<<"Poligono:"<<endl;
 	if(cant > 3){
 		while(i< cant){
-		cout<<"px "<<i<<endl;
+		//cout<<"px "<<i<<endl;
 		cin>>x;						
-		cout<<"py "<<i<<endl;
+		//cout<<"py "<<i<<endl;
 		cin>>y;
 		p.npto.at(i)={x,y};
 		i++;	
@@ -78,22 +78,22 @@ void SetVertice(Poligono &p, unsigned cant){
 }
 
 unsigned GetCantidadLados(const Poligono &p){
-	return p.nvertices+1;			//ya que el array comienza en 0
+	return p.nvertices;			
 }
 
-void RemoveVertice(Poligono p){
+void RemoveVertice(Poligono &p){
 	p.nvertices= p.nvertices -1;
 }
 
-int GetPerimetro(const Poligono & p){
+float GetPerimetro(const Poligono & p){
 	unsigned i=0, j=i+1;
-	int per=0;
+	float per=0;
 	while(i < p.nvertices){
 		per=GetHip(p.npto.at(i),p.npto.at(j));
 		i++;
 		j++;
 	}
-	if(i == p.nvertices){
+	if(i == p.nvertices){			//distancia del ultimo pto con el inicial
 		per= per+ GetHip(p.npto.at(i), p.npto.at(0));
 	}
 	return per;
