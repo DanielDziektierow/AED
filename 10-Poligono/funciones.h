@@ -40,6 +40,7 @@ unsigned GetCantidadLados(const Poligono &);
 float GetPerimetro(const Poligono &);
 
 bool ExtraerPoligono(Poligono &);
+bool ExtraerPuntos(ifstream &, Poligono &, unsigned);
 bool ExtraerColor(ifstream &, Color &);
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
@@ -110,6 +111,26 @@ float GetPerimetro(const Poligono & p){
 	return in;
 }
 */
+bool ExtraerPuntos(ifstream &in, Poligono &pol, unsigned cant){
+	unsigned aux=0;
+	char carac;
+	in>>cant;
+	in>>carac;
+	if(carac =="{"){
+		while (cant == 0){
+			in>>pol.npto.at(cant).x;	//probando si lo toma
+			//pol.npto.at(cant).x=aux;
+			in>>carac;
+			in>>pol.npto.at(cant).y;
+			if(cant == 1) in>>carac;	//}
+		--cant;
+		}
+	}
+
+	
+	return bool(in);
+}
+
 bool ExtraerColor(ifstream &in, Color &c){
 	unsigned i=0, aux=0;
 	char coma;

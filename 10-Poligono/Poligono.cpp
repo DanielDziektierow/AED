@@ -16,7 +16,7 @@ int main (){
 	Poligono pol;
 	pol.nvertices=4;						//Vamos a usarlo para setear sus lados
 
-	//assert(ExtraerColor(in, pol.colr));
+	assert(ExtraerColor(in, pol.colr));
 	return 0;
 }
 	/*
