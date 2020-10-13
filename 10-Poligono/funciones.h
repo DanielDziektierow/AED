@@ -9,6 +9,7 @@
 #include <iostream>
 #include <cassert>
 #include <string>
+#include <fstream>
 #include <array>
 #include "C:\Users\DanielDziektierow\Documents\AED\11-Punto\Punto.h"
 #include "Color.h"
@@ -38,6 +39,8 @@ void RemoveVertice(Poligono&);
 unsigned GetCantidadLados(const Poligono &); 
 float GetPerimetro(const Poligono &);
 
+bool ExtraerPoligono(Poligono &);
+bool ExtraerColor(ifstream &, Color &);
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
 
@@ -97,4 +100,25 @@ float GetPerimetro(const Poligono & p){
 		per= per+ GetHip(p.npto.at(i), p.npto.at(0));
 	}
 	return per;
+}
+
+/*bool ExtraerPoligono(Poligono & p){
+	ifstream in("input.txt");
+
+	ExtraerColor(in, p.colr);
+	//ExtraerPuntos(in, p);
+	return in;
+}
+*/
+bool ExtraerColor(ifstream &in, Color &c){
+	unsigned i=0, aux=0;
+	char coma;
+	while (i<=3)
+	{
+		in>>aux;
+		in>>coma;
+        c.col.at(i)=aux;
+		++i;
+	}
+    return (bool)in;
 }

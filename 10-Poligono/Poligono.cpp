@@ -11,10 +11,15 @@
 //Main
 int main (){
 	unsigned lados;
+	ifstream in("input.txt");
 	Punto test={99,99};
 	Poligono pol;
 	pol.nvertices=4;						//Vamos a usarlo para setear sus lados
-	
+
+	//assert(ExtraerColor(in, pol.colr));
+	return 0;
+}
+	/*
 	SetVertice(pol,pol.nvertices);			
 	//No olvidar setear el primer elemento en 1 para que no falle el assert
 	AddVertice(pol,test);
@@ -31,8 +36,7 @@ int main (){
 	RemoveVertice(pol);
 	assert(pol.nvertices == 4);
 	
-	
-	return 0;
-}
+	*/
+
 
 
