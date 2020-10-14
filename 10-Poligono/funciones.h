@@ -39,7 +39,7 @@ void RemoveVertice(Poligono&);
 unsigned GetCantidadLados(const Poligono &); 
 float GetPerimetro(const Poligono &);
 
-bool ExtraerPoligono(Poligono &);
+bool ExtraerPoligono(ifstream &, Poligono &);
 bool ExtraerPuntos(ifstream &, Poligono &, unsigned);
 bool ExtraerColor(ifstream &, Color &);
 void AgregarColorpol(Poligono &);
@@ -103,43 +103,41 @@ float GetPerimetro(const Poligono & p){
 	return per;
 }
 
-/*bool ExtraerPoligono(Poligono & p){
-	ifstream in("input.txt");
-
-	ExtraerColor(in, p.colr);
-	//ExtraerPuntos(in, p);
-	return in;
+bool ExtraerPoligono(ifstream &in, Poligono & p){
+	while (not in.eof())
+	{
+		assert(ExtraerColor(in, p.colr));
+		assert(ExtraerPuntos(in, p, p.nvertices));
+	}
+	return bool(in);
 }
-*/
+
 bool ExtraerPuntos(ifstream &in, Poligono &pol, unsigned cant){
-	unsigned aux=0;
+	unsigned aux=0, i=0;
 	char carac;
 	in>>cant;
-	in>>carac;
-	if(carac =="{"){
-		while (cant == 0){
-			in>>pol.npto.at(cant).x;	//probando si lo toma
-			//pol.npto.at(cant).x=aux;
+	in>>carac;	//{
+	if(carac =='{'){
+		while (i < cant and carac != '}'){
+			in>>pol.npto.at(i).x;	//probando si lo toma
 			in>>carac;
-			in>>pol.npto.at(cant).y;
-			if(cant == 1) in>>carac;	//}
-		--cant;
+			in>>pol.npto.at(i).y;
+			in>>carac;
+			++i;
 		}
 	}
-
-	
 	return bool(in);
 }
 
 bool ExtraerColor(ifstream &in, Color &c){
 	unsigned i=0, aux=0;
 	char coma;
-	while (i<=3)
+	while (i<3)
 	{
 		in>>aux;
 		in>>coma;
         c.col.at(i)=aux;
 		++i;
 	}
-    return (bool)in;
+	return bool(in);
 }
