@@ -42,6 +42,10 @@ float GetPerimetro(const Poligono &);
 bool ExtraerPoligono(ifstream &, Poligono &);
 bool ExtraerPuntos(ifstream &, Poligono &, unsigned);
 bool ExtraerColor(ifstream &, Color &);
+bool SalidaPoligono(ofstream &, Poligono &);
+bool SalidaPuntos(ofstream &, Poligono &);
+void SalidaColor(ofstream &, Color &);
+
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
 
@@ -140,4 +144,14 @@ bool ExtraerColor(ifstream &in, Color &c){
 		++i;
 	}
 	return bool(in);
+}
+
+void SalidaColor(ofstream &out, Color &c){
+	out.open("output.txt");
+	out<<"R: "<<c.col.at(0)<<"G: "<<c.col.at(1)<<"B: "<<c.col.at(2)<<endl;
+	out.close();
+}
+
+bool SalidaPuntos(ofstream & out, Poligono &p){
+	
 }

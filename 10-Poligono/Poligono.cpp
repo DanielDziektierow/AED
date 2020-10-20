@@ -12,13 +12,18 @@
 int main (){
 	unsigned lados;
 	ifstream in("input.txt");
+	ofstream out("output.txt");
 	Punto test={99,99};
 	Poligono pol;
+	Color pruebacol;
+	pruebacol.col.at(0)=1;
+	pruebacol.col.at(1)=33;
+	pruebacol.col.at(2)=200;
 	pol.nvertices=4;						//Vamos a usarlo para setear sus lados
 
-	//assert(ExtraerColor(in, pol.colr));
-	//assert(ExtraerPuntos(in, pol, pol.nvertices));
 	assert(ExtraerPoligono(in, pol));
+	SalidaColor(out, pruebacol);
+	cout<<pruebacol.col.at(0);
 	return 0;
 }
 	/*
