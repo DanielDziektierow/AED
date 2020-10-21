@@ -146,12 +146,26 @@ bool ExtraerColor(ifstream &in, Color &c){
 	return bool(in);
 }
 
+bool SalidaPoligono(std::ostream &out, const Poligono &pol){
+	unsigned i=0;
+	out<<"{";
+    SalidaColor(out, pol.c);
+    while (i < pol.n){
+        SalidaPunto(out, pol.npto.at(i)) ;
+        ++i;
+    }
+    out << "} " <<"\n" ;
+    return bool (os);
+}
+
 void SalidaColor(ofstream &out, Color &c){
 	out.open("output.txt");
-	out<<"R: "<<c.col.at(0)<<"G: "<<c.col.at(1)<<"B: "<<c.col.at(2)<<endl;
+	out<<"R: "<<c.col.at(0)<<"G: "<<c.col.at(1)<<"B: "<<c.col.at(2)<<" ";
 	out.close();
 }
 
-bool SalidaPuntos(ofstream & out, Poligono &p){
-	
+bool SalidaPuntos(ofstream &out, Punto &p){
+	os <<"("<< p.x << "," << p.y << ")" ;
+	return bool (os);
 }
+
