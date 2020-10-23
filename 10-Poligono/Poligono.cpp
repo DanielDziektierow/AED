@@ -21,10 +21,12 @@ int main (){
 	pruebacol.col.at(2)=200;
 	pol.nvertices=4;						//Vamos a usarlo para setear sus lados
 
-	assert(ExtraerPoligono(in, pol))
+	assert(ExtraerPoligono(in, pol));
 	in.close();
-	SalidaColor(out, pruebacol);
-	cout<<pruebacol.col.at(0);
+	SalidaPoligono(out, pol);
+	//SalidaColor(out, pol.colr);
+	//SalidaPunto(out, pol.npto.at(0));
+	
 	return 0;
 }
 	/*

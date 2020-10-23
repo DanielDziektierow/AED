@@ -42,8 +42,8 @@ float GetPerimetro(const Poligono &);
 bool ExtraerPoligono(ifstream &, Poligono &);
 bool ExtraerPuntos(ifstream &, Poligono &, unsigned);
 bool ExtraerColor(ifstream &, Color &);
-bool SalidaPoligono(ofstream &, Poligono &);
-bool SalidaPuntos(ofstream &, Poligono &);
+void SalidaPoligono(ofstream &, Poligono &);
+void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
 
 void AgregarColorpol(Poligono &);
@@ -108,11 +108,11 @@ float GetPerimetro(const Poligono & p){
 }
 
 bool ExtraerPoligono(ifstream &in, Poligono & p){
-	while (not in.eof())
-	{
+	//while (not in.eof())
+	//{
 		assert(ExtraerColor(in, p.colr));
 		assert(ExtraerPuntos(in, p, p.nvertices));
-	}
+	//}
 	return bool(in);
 }
 
@@ -146,26 +146,26 @@ bool ExtraerColor(ifstream &in, Color &c){
 	return bool(in);
 }
 
-bool SalidaPoligono(std::ostream &out, const Poligono &pol){
+void SalidaPoligono(ofstream &out, Poligono &pol){
 	unsigned i=0;
 	out<<"{";
-    SalidaColor(out, pol.c);
-    while (i < pol.n){
+    SalidaColor(out, pol.colr);
+    while (i < pol.nvertices){
         SalidaPunto(out, pol.npto.at(i)) ;
         ++i;
     }
-    out << "} " <<"\n" ;
-    return bool (os);
+    out << "} " ;
 }
 
 void SalidaColor(ofstream &out, Color &c){
-	out.open("output.txt");
-	out<<"R: "<<c.col.at(0)<<"G: "<<c.col.at(1)<<"B: "<<c.col.at(2)<<" ";
-	out.close();
+	//out.open("output.txt");
+	out<<"R: "<<int(c.col.at(0))<<" G: "<<int(c.col.at(1))<<" B: "<<int(c.col.at(2))<<" ";
+
 }
 
-bool SalidaPuntos(ofstream &out, Punto &p){
-	os <<"("<< p.x << "," << p.y << ")" ;
-	return bool (os);
+void SalidaPunto(ofstream &out, Punto &p){
+	//out.open("output.txt");
+	out <<" ("<<p.x<< ","<< p.y<< ")" ;
+
 }
 
