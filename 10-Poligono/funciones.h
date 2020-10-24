@@ -8,6 +8,7 @@
 
 #include <iostream>
 #include <cassert>
+#include <cstdio>
 #include <string>
 #include <fstream>
 #include <array>
@@ -108,11 +109,16 @@ float GetPerimetro(const Poligono & p){
 }
 
 bool ExtraerPoligono(ifstream &in, Poligono & p){
-	//while (not in.eof())
-	//{
-		assert(ExtraerColor(in, p.colr));
-		assert(ExtraerPuntos(in, p, p.nvertices));
-	//}
+	bool aux=true;
+	char carac;
+	in>>carac;
+	while (carac!='#')
+	{
+		aux=ExtraerColor(in, p.colr);
+		aux=ExtraerPuntos(in, p, p.nvertices);
+		cout<<"p"<<p.npto.at(0).x<<" ";
+		in>>carac;
+	}
 	return bool(in);
 }
 
