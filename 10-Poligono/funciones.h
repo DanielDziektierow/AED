@@ -12,6 +12,7 @@
 #include <string>
 #include <fstream>
 #include <array>
+#include <vector>
 #include "C:\Users\DanielDziektierow\Documents\AED\11-Punto\Punto.h"
 #include "Color.h"
 
@@ -30,6 +31,8 @@ struct Poligono{
 	Color colr;
 	};
 	
+//declaro vectores
+vector <Poligono> Poligonos;
 
 //Prototipos
 
@@ -46,6 +49,7 @@ bool ExtraerColor(ifstream &, Color &);
 void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
+void GuardarPoligono(Poligono &);
 
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
@@ -117,6 +121,7 @@ bool ExtraerPoligono(ifstream &in, Poligono & p){
 		aux=ExtraerColor(in, p.colr);
 		aux=ExtraerPuntos(in, p, p.nvertices);
 		cout<<"p"<<p.npto.at(0).x<<" ";
+		//GuardarPoligono(p);
 		in>>carac;
 	}
 	return bool(in);

@@ -13,6 +13,8 @@ int main (){
 	unsigned lados;
 	ifstream in("input.txt");
 	ofstream out("output.txt");
+	vector <Poligono> Polgonos;
+
 	Punto test={99,99};
 	Poligono pol;
 	Color pruebacol;
@@ -27,6 +29,7 @@ int main (){
 	SalidaPoligono(out, pol);
 	//SalidaColor(out, pol.colr);
 	//SalidaPunto(out, pol.npto.at(0));
+	out.close();
 	
 	return 0;
 }
