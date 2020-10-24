@@ -33,6 +33,7 @@ struct Poligono{
 	
 //declaro vectores
 vector <Poligono> Poligonos;
+vector <Poligono> PolXs_per;
 
 //Prototipos
 
@@ -46,10 +47,14 @@ float GetPerimetro(const Poligono &);
 bool ExtraerPoligono(ifstream &, Poligono &);
 bool ExtraerPuntos(ifstream &, Poligono &, unsigned);
 bool ExtraerColor(ifstream &, Color &);
+bool ExtraerPolXs_per(ifstream &, float);
+
 void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
-void GuardarPoligono(Poligono &);
+void SalidaPolXs_per(ofstream &, Poligono &);
+
+void GuardarPoligono(const Poligono &);
 
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
@@ -121,7 +126,7 @@ bool ExtraerPoligono(ifstream &in, Poligono & p){
 		aux=ExtraerColor(in, p.colr);
 		aux=ExtraerPuntos(in, p, p.nvertices);
 		cout<<"p"<<p.npto.at(0).x<<" ";
-		//GuardarPoligono(p);
+		GuardarPoligono(p);
 		in>>carac;
 	}
 	return bool(in);
@@ -157,17 +162,36 @@ bool ExtraerColor(ifstream &in, Color &c){
 	return bool(in);
 }
 
-void SalidaPoligono(ofstream &out, Poligono &pol){
+bool ExtraerPolXs_per(ifstream &in, float per){
+	float aux;
 	unsigned i=0;
-	out<<"{";
-    SalidaColor(out, pol.colr);
-    while (i < pol.nvertices){
-        SalidaPunto(out, pol.npto.at(i)) ;
-        ++i;
-    }
-    out << "} " ;
+	while (i+1 <= Poligonos.size())			//Poligonos.size empieza en 1
+	{
+		aux=GetPerimetro(Poligonos.at(i));
+		if(aux>per){
+			PolXs_per.push_back(Poligonos.at(i));
+		}
+		++i;
+	}
+	return bool(in);	
 }
 
+void SalidaPoligono(ofstream &out, Poligono &pol){
+	unsigned i=0, j=1;			//Poligonos.size no tiene en cuenta el 0
+	while (j <= Poligonos.size())
+	{
+		out<<"{";
+    	SalidaColor(out, pol.colr);
+    	while (i < pol.nvertices){
+        	SalidaPunto(out, pol.npto.at(i)) ;
+        	++i;
+    	}
+    	out << "}" ;
+		i=0;
+		++j;
+	}
+}
+	
 void SalidaColor(ofstream &out, Color &c){
 	//out.open("output.txt");
 	out<<"R: "<<int(c.col.at(0))<<" G: "<<int(c.col.at(1))<<" B: "<<int(c.col.at(2))<<" ";
@@ -178,5 +202,9 @@ void SalidaPunto(ofstream &out, Punto &p){
 	//out.open("output.txt");
 	out <<" ("<<p.x<< ","<< p.y<< ")" ;
 
+}
+
+void GuardarPoligono(const Poligono &p){
+	Poligonos.push_back(p);
 }
 

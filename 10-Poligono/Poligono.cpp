@@ -13,7 +13,7 @@ int main (){
 	unsigned lados;
 	ifstream in("input.txt");
 	ofstream out("output.txt");
-	vector <Poligono> Polgonos;
+
 
 	Punto test={99,99};
 	Poligono pol;
