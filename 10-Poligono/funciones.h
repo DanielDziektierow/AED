@@ -109,11 +109,12 @@ float GetPerimetro(const Poligono & p){
 	while(i < p.nvertices){
 		per=GetHip(p.npto.at(i),p.npto.at(j));
 		i++;
-		j++;
+		++j;
 	}
 	if(i == p.nvertices){			//distancia del ultimo pto con el inicial
 		per= per+ GetHip(p.npto.at(i), p.npto.at(0));
 	}
+	cout<<"\n"<<p.npto.at(0).x;
 	return per;
 }
 
@@ -177,16 +178,16 @@ bool ExtraerPolXs_per(ifstream &in, float per){
 }
 
 void SalidaPoligono(ofstream &out, Poligono &pol){
-	unsigned i=0, j=1;			//Poligonos.size no tiene en cuenta el 0
-	while (j <= Poligonos.size())
+	unsigned i=0, j=0;			//Poligonos.size no tiene en cuenta el 0
+	while (j < Poligonos.size())
 	{
 		out<<"{";
-    	SalidaColor(out, pol.colr);
+    	SalidaColor(out, Poligonos.at(j).colr);
     	while (i < pol.nvertices){
-        	SalidaPunto(out, pol.npto.at(i)) ;
+        	SalidaPunto(out, Poligonos.at(j).npto.at(i)) ;
         	++i;
     	}
-    	out << "}" ;
+    	out << "}\n" ;
 		i=0;
 		++j;
 	}
@@ -194,12 +195,12 @@ void SalidaPoligono(ofstream &out, Poligono &pol){
 	
 void SalidaColor(ofstream &out, Color &c){
 	//out.open("output.txt");
-	out<<"R: "<<int(c.col.at(0))<<" G: "<<int(c.col.at(1))<<" B: "<<int(c.col.at(2))<<" ";
+	out<<"R:"<<int(c.col.at(0))<<" G: "<<int(c.col.at(1))<<" B: "<<int(c.col.at(2))<<" ";
 
 }
 
 void SalidaPunto(ofstream &out, Punto &p){
-	//out.open("output.txt");
+	//cout<<"Hola\n";
 	out <<" ("<<p.x<< ","<< p.y<< ")" ;
 
 }
