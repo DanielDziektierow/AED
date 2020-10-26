@@ -12,7 +12,7 @@
 int main (){
 	unsigned lados;
 	ifstream in("input.txt");
-	ofstream out("output.txt");
+	ofstream out("output.txt"), mayores("polMayores.txt");
 	float per=100.2;
 
 
@@ -32,6 +32,8 @@ int main (){
 	//SalidaPunto(out, pol.npto.at(0));
 
 	assert(ExtraerPolXs_per(in, per));
+	SalidaPolXs_per(mayores);
+
 	in.close();
 	out.close();
 	

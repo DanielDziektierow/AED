@@ -53,6 +53,7 @@ void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
 void SalidaPolXs_per(ofstream &, Poligono &);
+void SalidaPolXs_per(ofstream &out);
 
 void GuardarPoligono(const Poligono &);
 
@@ -106,15 +107,12 @@ void RemoveVertice(Poligono &p){
 float GetPerimetro(const Poligono & p){
 	unsigned i=0, j=i+1;
 	float per=0;
-	while(i < p.nvertices){
-		per=GetHip(p.npto.at(i),p.npto.at(j));
+	while(i+1 < p.nvertices){
+		per=per+GetHip(p.npto.at(i),p.npto.at(j));
 		i++;
 		++j;
 	}
-	if(i == p.nvertices){			//distancia del ultimo pto con el inicial
-		per= per+ GetHip(p.npto.at(i), p.npto.at(0));
-	}
-	cout<<"\n"<<p.npto.at(0).x;
+	per= per+ GetHip(p.npto.at(i), p.npto.at(0));		//distancia del ultimo pto con el inicial
 	return per;
 }
 
@@ -203,6 +201,22 @@ void SalidaPunto(ofstream &out, Punto &p){
 	//cout<<"Hola\n";
 	out <<" ("<<p.x<< ","<< p.y<< ")" ;
 
+}
+
+void SalidaPolXs_per(ofstream &out){
+	unsigned i=0, j=0;
+	while (j< PolXs_per.size())
+	{
+		out<<"{";
+    	SalidaColor(out, PolXs_per.at(j).colr);
+    	while (i < PolXs_per.at(j).nvertices){
+        	SalidaPunto(out, PolXs_per.at(j).npto.at(i)) ;
+        	++i;
+    	}
+    	out << "}\n" ;
+		i=0;
+		++j;
+	}	
 }
 
 void GuardarPoligono(const Poligono &p){
