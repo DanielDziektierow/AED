@@ -70,6 +70,7 @@ void MostrarColorPol(const Poligono &p){
 }
 
 void AddVertice(Poligono &pol, Punto p){
+	//new Punto;
 	if(pol.nvertices < MAX_PTOS){
 		pol.nvertices=pol.nvertices +1;
 		pol.npto.at(pol.nvertices)=p;
