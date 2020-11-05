@@ -22,12 +22,10 @@ using namespace std;
 const unsigned MAX=3;
 const unsigned MAX_PTOS=10;
 
-//declaro structs
-using nPtos= std::array<Punto,MAX_PTOS>;
 
 struct Poligono{
 	unsigned nvertices;
-	nPtos npto;
+	Punto *ppunto;
 	Color colr;
 	};
 	
@@ -70,13 +68,9 @@ void MostrarColorPol(const Poligono &p){
 }
 
 void AddVertice(Poligono &pol, Punto p){
-	Punto *ppunto=new Punto;
-	*ppunto= p;
+	pol.ppunto=new Punto;
+	*pol.ppunto= p;
 	++pol.nvertices;
-/*	if(pol.nvertices < MAX_PTOS){
-		pol.nvertices=pol.nvertices +1;
-		pol.npto.at(pol.nvertices)=p;
-	}*/
 }
 
 Punto GetVertice(const Poligono &p, unsigned v){
