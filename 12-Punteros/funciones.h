@@ -16,28 +16,34 @@
 #include "C:\Users\DanielDziektierow\Documents\AED\11-Punto\Punto.h"
 #include "Color.h"
 
-using namespace std;
+
 
 //const
 const unsigned MAX=3;
 const unsigned MAX_PTOS=10;
 
 
+
+struct NodoPto{
+	Punto pto;
+	NodoPto *nextpto;
+};
 struct Poligono{
 	unsigned nvertices;
-	Punto *ppunto;
+	NodoPto *ppunto;
 	Color colr;
-	};
+};
 	
-//declaro vectores
-vector <Poligono> Poligonos;
-vector <Poligono> PolXs_per;
-
+struct Nodo
+{
+	Poligono p;
+	Nodo *nextpol;
+};
 //Prototipos
 
 void SetVertice(Poligono &, unsigned);
-Punto GetVertice(const Poligono &, unsigned);
-void AddVertice(Poligono &, Punto);
+Punto GetVertice(const Poligono &);
+void AddVertice(Nodo *&, Poligono &, Punto);
 void RemoveVertice(Poligono&);
 unsigned GetCantidadLados(const Poligono &); 
 float GetPerimetro(const Poligono &);
@@ -45,17 +51,17 @@ float GetPerimetro(const Poligono &);
 bool ExtraerPoligono(ifstream &, Poligono &);
 bool ExtraerPuntos(ifstream &, Poligono &, unsigned);
 bool ExtraerColor(ifstream &, Color &);
-bool ExtraerPolXs_per(ifstream &, float);
+bool ExtraerPolXs_per(ifstream &, float);				//Extraer poligonos con erimetros mayores a....
 
 void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
-void SalidaPolXs_per(ofstream &, Poligono &);
-void SalidaPolXs_per(ofstream &out);
+void SalidaPolXs_per(ofstream &, Poligono &);			
+void SalidaPolXs_per(ofstream &out);					//Enviar poligonos con erimetros mayores a....
 
 void GuardarPoligono(const Poligono &);
 
-void AgregarColorpol(Poligono &);
+void AgregarColorpol(Poligono &, Color);
 void MostrarColorPol(const Poligono &);
 
 //funciones
@@ -67,16 +73,22 @@ void MostrarColorPol(const Poligono &p){
 	cout<<GetHtmlRGB(p.colr);
 }
 
-void AddVertice(Poligono &pol, Punto p){
-	pol.ppunto=new Punto;
-	*pol.ppunto= p;
+void AddVertice(NodoPto *&n, Poligono &pol, Punto p){			//*& Para que cambie ilimitadamente
+	NodoPto *nuevo= new NodoPto();
+	//Cargo datos del nuevo nodo
+	nuevo->pto=p;
+	nuevo->nextpto=n;
+	//Muevo el puntero al nuevo nodo
+	n=nuevo;
+	//Armo la pila en el poligono
+	pol.ppunto=n;		
 	++pol.nvertices;
 }
 
-Punto GetVertice(const Poligono &p, unsigned v){
-	return p.npto.at(v);
+Punto GetVertice(const Poligono &p){
+	return p.ppunto->pto;
 }
-
+/*
 void SetVertice(Poligono &p, unsigned cant){
 	unsigned i=0;
 	float x,y;
@@ -122,7 +134,6 @@ bool ExtraerPoligono(ifstream &in, Poligono & p){
 		aux=ExtraerColor(in, p.colr);
 		aux=ExtraerPuntos(in, p, p.nvertices);
 		cout<<"p"<<p.npto.at(0).x<<" ";
-		GuardarPoligono(p);
 		in>>carac;
 	}
 	return bool(in);
@@ -215,8 +226,4 @@ void SalidaPolXs_per(ofstream &out){
 		++j;
 	}	
 }
-
-void GuardarPoligono(const Poligono &p){
-	Poligonos.push_back(p);
-}
-
+*/
