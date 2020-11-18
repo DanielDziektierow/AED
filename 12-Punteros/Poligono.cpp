@@ -6,45 +6,47 @@
 *Nombre: Daniel
 */
 
-#include "funciones.h"
+#include "PoligonoLink.h"
 using namespace std;
 //Main
 int main (){
 	unsigned lados;
 	float per=100.2;
 	Poligono pol;
-	Punto point;
-	point.x=1;
-	point.y=2;
-	//ifstream in("input.txt");
-	//ofstream out("output.txt"), mayores("polMayores.txt");
+	Punto point={1,2}, point2={3,8}, point3={-1,-5};
+	pol.ppunto=nullptr;
 	
-	NodoPto *conjPto=nullptr;
-	//conjPto->nextpto=nullptr;
-	AddVertice(conjPto,pol,point);
-	cout<<GetVertice(pol).x<<endl;
+	ifstream in("input.txt");
+	ofstream out("output.txt"), mayores("polMayores.txt");
 	
+	AddVertice(pol,point);	//(1,2)
+	
+	AddVertice(pol,point2);	// [1](1,2) [0](3,8)
+	cout<<GetVertice(pol, 0).y<<endl;
+	
+	AddVertice(pol,point3);	//[2](1,2) [1](3,8) [0](-1,-5)
+	cout<<GetVertice(pol, 2).y<<endl;
 
+	//MostrarPuntos(pol.ppunto);
 
-	//Punto test={99,99};
-	//Color pruebacol;
-	//pruebacol.col.at(0)=1;
-	//pruebacol.col.at(1)=33;
-	//pruebacol.col.at(2)=200;
-	//pol.nvertices=4;						//Vamos a usarlo para setear sus lados
+	SetVertice(pol.ppunto,1,point);
+	//MostrarPuntos(pol.ppunto);
+	
+	//RemoveVertice(pol);					//hacerla bool	
+	//MostrarPuntos(pol.ppunto);
+	cout<<"\n"<<GetCantidadLados(pol)<<endl;
+	cout<<GetPerimetro(pol)<<endl;
 
-	//assert(ExtraerPoligono(in, pol));
-	//cout<<int(pol.colr.col.at(0));
-
-	//SalidaPoligono(out, pol);
-	//SalidaColor(out, pol.colr);
-	//SalidaPunto(out, pol.npto.at(0));
+	//AddPoligono(nd, pol);
+	assert(ExtraerColor(in, pol.colr));
+	assert(ExtraerPuntos(in,pol,pol.nvertices));
+	SalidaColor(out,pol.colr);
 
 	//assert(ExtraerPolXs_per(in, per));
 	//SalidaPolXs_per(mayores);
 
-	//in.close();
-	//out.close();
+	in.close();
+	out.close();
 	
 	return 0;
 }
