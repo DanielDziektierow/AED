@@ -6,7 +6,7 @@
 *Nombre: Daniel
 */
 
-#include "funciones.h"
+#include "PoligonoCont.h"
 
 int mainTest(){
     unsigned lados;

@@ -1,13 +1,13 @@
-all:  Poligono
+all:  Filtrar
 
-Poligono:  Poligono.o 
-	g++  Poligono.o  -o Poligono
+Poligono:  Filtrar.o 
+	g++  Filtrar.o  -o Filtrar
 
-Poligono.o: Poligono.cpp funciones.h
+Poligono.o: Poligono.cpp PoligonoCont.h
 	g++ -c Poligono.cpp
 
 PoligonoTest.o: PoligonoTest.cpp 
 	g++ -c PoligonoTest.cpp
 
 clean:
-	rm *.o Poligono
+	rm *.o Filtrar

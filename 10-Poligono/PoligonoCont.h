@@ -22,8 +22,10 @@ using namespace std;
 const unsigned MAX=3;
 const unsigned MAX_PTOS=10;
 
+
 //declaro structs
 using nPtos= std::array<Punto,MAX_PTOS>;
+
 
 struct Poligono{
 	unsigned nvertices;
@@ -31,31 +33,23 @@ struct Poligono{
 	Color colr;
 	};
 	
-//declaro vectores
-vector <Poligono> Poligonos;
-vector <Poligono> PolXs_per;
-
 //Prototipos
 
-void SetVertice(Poligono &, unsigned);
+void SetVertice(Poligono &, unsigned, Punto);
 Punto GetVertice(const Poligono &, unsigned);
 void AddVertice(Poligono &, Punto);
 void RemoveVertice(Poligono&);
 unsigned GetCantidadLados(const Poligono &); 
 float GetPerimetro(const Poligono &);
 
-bool ExtraerPoligono(ifstream &, Poligono &);
-bool ExtraerPuntos(ifstream &, Poligono &, unsigned);
+bool ExtracSalPoligono(ifstream &, ofstream &, Poligono &, float);
+bool ExtraerPuntos(ifstream &, Poligono &);
 bool ExtraerColor(ifstream &, Color &);
-bool ExtraerPolXs_per(ifstream &, float);
+
 
 void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
-void SalidaPolXs_per(ofstream &, Poligono &);
-void SalidaPolXs_per(ofstream &out);
-
-void GuardarPoligono(const Poligono &);
 
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
@@ -70,10 +64,9 @@ void MostrarColorPol(const Poligono &p){
 }
 
 void AddVertice(Poligono &pol, Punto p){
-	//new Punto;
 	if(pol.nvertices < MAX_PTOS){
-		pol.nvertices=pol.nvertices +1;
 		pol.npto.at(pol.nvertices)=p;
+		++pol.nvertices;
 	}
 }
 
@@ -81,20 +74,8 @@ Punto GetVertice(const Poligono &p, unsigned v){
 	return p.npto.at(v);
 }
 
-void SetVertice(Poligono &p, unsigned cant){
-	unsigned i=0;
-	float x,y;
-	//cout<<"Poligono:"<<endl;
-	if(cant > 3){
-		while(i< cant){
-		//cout<<"px "<<i<<endl;
-		cin>>x;						
-		//cout<<"py "<<i<<endl;
-		cin>>y;
-		p.npto.at(i)={x,y};
-		i++;	
-		}
-	}
+void SetVertice(Poligono &p, unsigned pos, Punto point){
+	p.npto.at(pos)=point;
 }
 
 unsigned GetCantidadLados(const Poligono &p){
@@ -117,31 +98,48 @@ float GetPerimetro(const Poligono & p){
 	return per;
 }
 
-bool ExtraerPoligono(ifstream &in, Poligono & p){
+bool ExtracSalPoligono(ifstream &in,ofstream &out, Poligono & p, float per){
 	bool aux=true;
+	float xper;
 	char carac;
-	in>>carac;
-	while (carac!='#')
-	{
-		aux=ExtraerColor(in, p.colr);
-		aux=ExtraerPuntos(in, p, p.nvertices);
-		cout<<"p"<<p.npto.at(0).x<<" ";
-		GuardarPoligono(p);
-		in>>carac;
+	if(per < 0){
+		while (carac!='#'){
+			aux=ExtraerColor(in, p.colr);
+			aux=ExtraerPuntos(in, p);
+			SalidaPoligono(out, p);
+			in>>carac;
+		}
 	}
+	else
+	{
+		while (carac!='#'){
+			aux=ExtraerColor(in, p.colr);
+			aux=ExtraerPuntos(in, p);
+			xper=GetPerimetro(p);
+			if (xper > per)
+			{
+				SalidaPoligono(out, p);
+			}			
+			in>>carac;
+		}
+	}
+	in.close();
+	out.close();
 	return bool(in);
 }
 
-bool ExtraerPuntos(ifstream &in, Poligono &pol, unsigned cant){
-	unsigned aux=0, i=0;
+bool ExtraerPuntos(ifstream &in, Poligono &p){
+	unsigned cant, i=0;
 	char carac;
 	in>>cant;
-	in>>carac;	//{
-	if(carac =='{'){
-		while (i < cant and carac != '}'){
-			in>>pol.npto.at(i).x;	//probando si lo toma
+	p.nvertices=cant;
+	in>>carac;
+	if(carac == '{'){
+		while (i<cant and carac != '}')
+		{
+			in>>p.npto.at(i).x;	//probando si lo toma
 			in>>carac;
-			in>>pol.npto.at(i).y;
+			in>>p.npto.at(i).y;
 			in>>carac;
 			++i;
 		}
@@ -162,34 +160,16 @@ bool ExtraerColor(ifstream &in, Color &c){
 	return bool(in);
 }
 
-bool ExtraerPolXs_per(ifstream &in, float per){
-	float aux;
-	unsigned i=0;
-	while (i+1 <= Poligonos.size())			//Poligonos.size empieza en 1
-	{
-		aux=GetPerimetro(Poligonos.at(i));
-		if(aux>per){
-			PolXs_per.push_back(Poligonos.at(i));
-		}
+void SalidaPoligono(ofstream &out, Poligono &pol){
+	unsigned i=0;			//Poligonos.size no tiene en cuenta el 0
+	out<<"{";
+	SalidaColor(out, pol.colr);
+	while (i < pol.nvertices){
+		SalidaPunto(out, pol.npto.at(i));
 		++i;
 	}
-	return bool(in);	
-}
-
-void SalidaPoligono(ofstream &out, Poligono &pol){
-	unsigned i=0, j=0;			//Poligonos.size no tiene en cuenta el 0
-	while (j < Poligonos.size())
-	{
-		out<<"{";
-    	SalidaColor(out, Poligonos.at(j).colr);
-    	while (i < pol.nvertices){
-        	SalidaPunto(out, Poligonos.at(j).npto.at(i)) ;
-        	++i;
-    	}
-    	out << "}\n" ;
-		i=0;
-		++j;
-	}
+	out << "}\n" ;
+	i=0;
 }
 	
 void SalidaColor(ofstream &out, Color &c){
@@ -203,24 +183,3 @@ void SalidaPunto(ofstream &out, Punto &p){
 	out <<" ("<<p.x<< ","<< p.y<< ")" ;
 
 }
-
-void SalidaPolXs_per(ofstream &out){
-	unsigned i=0, j=0;
-	while (j< PolXs_per.size())
-	{
-		out<<"{";
-    	SalidaColor(out, PolXs_per.at(j).colr);
-    	while (i < PolXs_per.at(j).nvertices){
-        	SalidaPunto(out, PolXs_per.at(j).npto.at(i)) ;
-        	++i;
-    	}
-    	out << "}\n" ;
-		i=0;
-		++j;
-	}	
-}
-
-void GuardarPoligono(const Poligono &p){
-	Poligonos.push_back(p);
-}
-

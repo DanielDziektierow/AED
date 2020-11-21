@@ -13,7 +13,6 @@
 #include <cstdint>
 #include <fstream>
 
-using namespace std;
 //const
 const unsigned MAX_COLOR=3;
 
