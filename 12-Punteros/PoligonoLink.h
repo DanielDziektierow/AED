@@ -6,6 +6,8 @@
 *Nombre: Daniel
 */
 
+//Tarea: leer los poligonos desde el out
+
 #include <iostream>
 #include <cassert>
 #include <cstdio>
@@ -28,11 +30,7 @@ struct Poligono{
 	Color colr;
 };
 	
-struct Nodo
-{
-	Poligono p;
-	Nodo *nextpol;
-};
+
 //Prototipos
 
 void SetVertice(Poligono &, unsigned, Punto);
@@ -41,24 +39,16 @@ void AddVertice(Poligono &, Punto);
 void RemoveVertice(Poligono&);
 unsigned GetCantidadLados(const Poligono &); 
 float GetPerimetro(const Poligono &);
-void MostrarPuntos(Nodo *&);
 
 
-//bool ExtraerPoligono(ifstream &, Poligono &);
-bool ExtraerPuntos(ifstream &, Poligono &, unsigned);
+
+bool ExtracSalPoligono(ifstream &, ofstream &, Poligono &, float);
+bool ExtraerPuntos(ifstream &,  Poligono &);
 bool ExtraerColor(ifstream &, Color &);
-bool ExtraerPolXs_per(ifstream &, float);				//Extraer poligonos con erimetros mayores a....
 
 void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
-void SalidaColor(ofstream &, Color );
-void SalidaPolXs_per(ofstream &, Poligono &);			
-void SalidaPolXs_per(ofstream &out);					//Enviar poligonos con erimetros mayores a....
-
-void GuardarPoligono(const Poligono &);
-void popPunto(Poligono &);
-void popPoligono(Nodo &);
-void AddPoligono(Nodo &, Poligono &);
+void SalidaColor(ofstream &, Color );//Color &
 
 void AgregarColorpol(Poligono &, Color);
 void MostrarColorPol(const Poligono &);
@@ -72,7 +62,7 @@ void MostrarColorPol(const Poligono &p){
 	cout<<GetHtmlRGB(p.colr);
 }
 
-void AddVertice(Poligono &pol, Punto p){			//*& Para que cambie ilimitadamente
+void AddVertice(Poligono &pol, Punto p){			
 	NodoPto *nuevo= new NodoPto();
 	//Cargo datos del nuevo nodo
 	nuevo->pto=p;
@@ -82,32 +72,16 @@ void AddVertice(Poligono &pol, Punto p){			//*& Para que cambie ilimitadamente
 	++pol.nvertices;
 }
 
-void MostrarPuntos(NodoPto *&p)	//Opcional
-{
-    NodoPto *aux = p;
-    while (aux != nullptr)
-    {
-        cout <<"("<< aux->pto.x<<", "<<aux->pto.y<<") " << endl;
-        aux = aux->nextpto;
-    }
-}
 
-void SetVertice(NodoPto *&l, unsigned v, Punto point){
+void SetVertice(Poligono &p, unsigned v, Punto point){
 	unsigned i=0;
-	NodoPto *aux=l;
+	NodoPto *aux=p.ppunto;
 	while(i<v){			//Recorremos lista
 		aux=aux->nextpto;
 		i++;	
 	}
 	aux->pto=point;
 }
-
-//void AddPoligono(Nodo *&n, Poligono &p){
-//	Nodo *nuevo=new Nodo();
-//	nuevo->p=p;
-//	nuevo->nextpol=n;
-//	n =  nuevo;
-//}
 
 Punto GetVertice(const Poligono &p, unsigned v){
 	NodoPto *aux = p.ppunto;
@@ -151,27 +125,49 @@ float GetPerimetro(const Poligono &p){
 	return per;
 }
 
-
-/*bool ExtraerPoligono(ifstream &in, Poligono & p){
-	bool aux=true;
+bool ExtracSalPoligono(ifstream &in, ofstream &out, Poligono &p, float per){
+	bool aux;
+	NodoPto *aux2 = p.ppunto;
+	float xper;
 	char carac;
-	in>>carac;
-	aux=ExtraerColor(in, p.colr);
-	aux=ExtraerPuntos(in, p, p.nvertices);
-	in>>carac;
+	if(per <0){
+		while(carac!='#')
+		{
+			aux=ExtraerColor(in, p.colr);
+			aux=ExtraerPuntos(in, p);
+			SalidaPoligono(out, p);
+			in>>carac;
+		}
+	}
+	else
+	{
+		while(carac!='#')
+		{
+			aux=ExtraerColor(in, p.colr);
+			aux=ExtraerPuntos(in, p);
+			xper=GetPerimetro(p);
+			if (xper > per)
+			{
+				SalidaPoligono(out, p);
+			}			
+			in>>carac;
+		}
+	}
+	
+	in.close();
+	out.close();
 	return bool(in);
 }
-*/
 
-bool ExtraerPuntos(ifstream &in, Poligono &pol, unsigned cant){
-	unsigned i=0;
+bool ExtraerPuntos(ifstream &in, Poligono &pol){
+	unsigned i;
 	char carac;
 	NodoPto *aux = pol.ppunto;
-	in>>cant;
-	in>>carac;	//{
+	in>>pol.nvertices;
+	in>>carac;								//{
 	if(carac =='{'){
 		while (aux != nullptr and carac != '}'){
-			in>>aux->pto.x;	//probando si lo toma
+			in>>aux->pto.x;	
 			in>>carac;
 			in>>aux->pto.y;
 			in>>carac;
@@ -193,60 +189,25 @@ bool ExtraerColor(ifstream &in, Color &c){
 	}
 	return bool(in);
 }
-/*
-bool ExtraerPolXs_per(ifstream &in, float per){
-	float aux;
-	unsigned i=0;
-	while (i+1 <= Poligonos.size())			//Poligonos.size empieza en 1
-	{
-		aux=GetPerimetro(Poligonos.at(i));
-		if(aux>per){
-			PolXs_per.push_back(Poligonos.at(i));
-		}
-		++i;
-	}
-	return bool(in);	
-}
 
 void SalidaPoligono(ofstream &out, Poligono &pol){
-	unsigned i=0, j=0;			//Poligonos.size no tiene en cuenta el 0
-	while (j < Poligonos.size())
-	{
-		out<<"{";
-    	SalidaColor(out, Poligonos.at(j).colr);
-    	while (i < pol.nvertices){
-        	SalidaPunto(out, Poligonos.at(j).npto.at(i)) ;
-        	++i;
-    	}
-    	out << "}\n" ;
-		i=0;
-		++j;
+	NodoPto *aux = pol.ppunto;
+	unsigned i=0;
+	out<<"{";
+	SalidaColor(out, pol.colr);
+	while (i<GetCantidadLados(pol)){
+		SalidaPunto(out, aux->pto);
+		aux=aux->nextpto;
+		++i;
 	}
+	out << "}\n" ;
 }
-*/	
+
 void SalidaColor(ofstream &out, Color c){
 	out<<"R:"<<int(c.col.at(0))<<" G: "<<int(c.col.at(1))<<" B: "<<int(c.col.at(2))<<" ";
 }
 
-/*void SalidaPunto(ofstream &out, Punto &p){
-	//cout<<"Hola\n";
+void SalidaPunto(ofstream &out, Punto &p){
 	out <<" ("<<p.x<< ","<< p.y<< ")" ;
 
 }
-/*
-void SalidaPolXs_per(ofstream &out){
-	unsigned i=0, j=0;
-	while (j< PolXs_per.size())
-	{
-		out<<"{";
-    	SalidaColor(out, PolXs_per.at(j).colr);
-    	while (i < PolXs_per.at(j).nvertices){
-        	SalidaPunto(out, PolXs_per.at(j).npto.at(i)) ;
-        	++i;
-    	}
-    	out << "}\n" ;
-		i=0;
-		++j;
-	}	
-}
-*/

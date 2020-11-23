@@ -10,43 +10,27 @@
 using namespace std;
 //Main
 int main (){
-	unsigned lados;
-	float per=100.2;
+	ifstream in("input.txt");
+	ofstream out("output.txt");
+	float per=150;
 	Poligono pol;
-	Punto point={1,2}, point2={3,8}, point3={-1,-5};
+	Punto point={1,2}, point2={3,8}, point3={-1,-5}, point4={-4,5};
+
 	pol.ppunto=nullptr;
 	
-	ifstream in("input.txt");
-	ofstream out("output.txt"), mayores("polMayores.txt");
+
 	
 	AddVertice(pol,point);	//(1,2)
-	
-	AddVertice(pol,point2);	// [1](1,2) [0](3,8)
-	cout<<GetVertice(pol, 0).y<<endl;
-	
+	AddVertice(pol,point2);	// [1](1,2) [0](3,8)	
 	AddVertice(pol,point3);	//[2](1,2) [1](3,8) [0](-1,-5)
-	cout<<GetVertice(pol, 2).y<<endl;
+	AddVertice(pol,point4); //[3](1,2) [2](3,8) [1](-1,-5) [0](-4,5)
 
-	//MostrarPuntos(pol.ppunto);
-
-	SetVertice(pol.ppunto,1,point);
-	//MostrarPuntos(pol.ppunto);
+	cout<<pol.ppunto->pto.x<<","<<pol.ppunto->pto.y;
 	
-	//RemoveVertice(pol);					//hacerla bool	
-	//MostrarPuntos(pol.ppunto);
-	cout<<"\n"<<GetCantidadLados(pol)<<endl;
-	cout<<GetPerimetro(pol)<<endl;
+	//Extraemos nuevos poligonos
+	assert(ExtracSalPoligono(in, out, pol, -1));		
 
-	//AddPoligono(nd, pol);
-	assert(ExtraerColor(in, pol.colr));
-	assert(ExtraerPuntos(in,pol,pol.nvertices));
-	SalidaColor(out,pol.colr);
 
-	//assert(ExtraerPolXs_per(in, per));
-	//SalidaPolXs_per(mayores);
-
-	in.close();
-	out.close();
 	
 	return 0;
 }
