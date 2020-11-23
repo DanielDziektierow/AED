@@ -25,14 +25,14 @@ struct Color{
 };
 
 //const//Estas constantes deben ir despues del struct de color
-const Color ROJO={255,0,0};
-const Color AZUL={0,0,255};
-const Color AMARILLO={255,255,0};
-const Color VERDE={0,255,0};
-const Color NARANJA={255,170,0};
-const Color VIOLETA={140,0,255};
-const Color NEGRO={0,0,0};
-const Color BLANCO={255,255,255};
+Color ROJO={255,0,0};
+Color AZUL={0,0,255};
+Color AMARILLO={255,255,0};
+Color VERDE={0,255,0};
+Color NARANJA={255,170,0};
+Color VIOLETA={140,0,255};
+Color NEGRO={0,0,0};
+Color BLANCO={255,255,255};
 
 //Prototipos
 Color Mezclar(Color &, Color &);
