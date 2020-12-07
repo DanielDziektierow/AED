@@ -1,6 +1,6 @@
 all:  Filtrar
 
-Poligono:  Filtrar.o 
+Filtrar:  Filtrar.o 
 	g++  Filtrar.o  -o Filtrar
 
 Poligono.o: Poligono.cpp PoligonoCont.h
@@ -10,4 +10,4 @@ PoligonoTest.o: PoligonoTest.cpp
 	g++ -c PoligonoTest.cpp
 
 clean:
-	rm *.o Filtrar
+	rm *.o Filtrar.exe
