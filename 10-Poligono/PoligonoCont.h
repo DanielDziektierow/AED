@@ -1,11 +1,3 @@
-/*Materia: Algoritmos y Estructura de Datos
-*Curso: K1051
-*Anio y Cuatrimestre: 2020 1er Cuat.
-*Legajo: 1599872
-*Apellido: Dziektierow
-*Nombre: Daniel
-*/
-
 #include <iostream>
 #include <cassert>
 #include <cstdio>
@@ -45,14 +37,16 @@ float GetPerimetro(const Poligono &);
 bool ExtracSalPoligono(ifstream &, ofstream &, Poligono &, float);
 bool ExtraerPuntos(ifstream &, Poligono &);
 bool ExtraerColor(ifstream &, Color &);
+bool ExtraerPoligono(ifstream&, Poligono&);
 
 
 void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
-
+void CopiarPoligonosConPerimetrosMayoresA(double,string,string);
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
+void LiberarMemoria(Poligono &);
 
 //funciones
 void AgregarColorpol(Poligono &p, Color c){
@@ -128,6 +122,18 @@ bool ExtracSalPoligono(ifstream &in,ofstream &out, Poligono & p, float per){
 	return bool(in);
 }
 
+bool ExtraerPoligono(ifstream &in, Poligono &p){
+	bool aux=true;
+	char carac;
+	while ( carac != '#' and carac!='|')//#
+	{
+		aux=ExtraerColor(in, p.colr);
+		aux=ExtraerPuntos(in, p);
+		in>>carac;
+	}
+	return bool(in);
+}
+
 bool ExtraerPuntos(ifstream &in, Poligono &p){
 	unsigned cant, i=0;
 	char carac;
@@ -173,13 +179,38 @@ void SalidaPoligono(ofstream &out, Poligono &pol){
 }
 	
 void SalidaColor(ofstream &out, Color &c){
-	//out.open("output.txt");
 	out<<"R:"<<int(c.col.at(0))<<" G: "<<int(c.col.at(1))<<" B: "<<int(c.col.at(2))<<" ";
-
 }
 
 void SalidaPunto(ofstream &out, Punto &p){
-	//cout<<"Hola\n";
 	out <<" ("<<p.x<< ","<< p.y<< ")" ;
+}
 
+void CopiarPoligonosConPerimetrosMayoresA(double per,string polinput,string poloutput){
+	ifstream in(polinput);
+	ofstream out(poloutput);
+	double perpol;
+	bool flag;
+	char carac;
+	Poligono p;
+	while (carac !='#')
+	{
+		flag=ExtraerPoligono(in,p);
+		perpol=GetPerimetro(p);
+		if (perpol > per)
+		{
+			SalidaPoligono(out,p);
+		}
+		LiberarMemoria(p);
+		in>>carac;
+	}
+	
+	//for(Poligono p; flag=ExtraerPoligono(in,p);){
+	//	SalidaPoligono(out, p);	
+	//}
+	//flag=ExtraerPoligono(in, p);
+	//SalidaPoligono(out, p);	
+}
+
+void LiberarMemoria(Poligono &p){
 }
