@@ -7,6 +7,19 @@
 */
 
 //Tarea: leer los poligonos desde el out
+//#pragma once
+/*
+
+// Foo.h
+#ifndef FOO_H_INCLUDED 
+#define FOO_H_INCLUDED
+
+class Foo    //  a class definition
+{
+};
+
+#endif
+*/
 
 #include <iostream>
 #include <cassert>
@@ -14,8 +27,7 @@
 #include <string>
 #include <fstream>
 #include <array>
-#include <vector>
-#include "C:\Users\DanielDziektierow\Documents\AED\11-Punto\Punto.h"
+#include "Punto.h"
 #include "Color.h"
 
 
@@ -40,11 +52,11 @@ void RemoveVertice(Poligono&);
 unsigned GetCantidadLados(const Poligono &); 
 float GetPerimetro(const Poligono &);
 
-
-
 bool ExtracSalPoligono(ifstream &, ofstream &, Poligono &, float);
 bool ExtraerPuntos(ifstream &,  Poligono &);
 bool ExtraerColor(ifstream &, Color &);
+bool ExtraerPoligono(ifstream &, Poligono &);
+void CopiarPoligonosConPerimetrosMayoresA(double, string, string);
 
 void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
@@ -52,6 +64,7 @@ void SalidaColor(ofstream &, Color );//Color &
 
 void AgregarColorpol(Poligono &, Color);
 void MostrarColorPol(const Poligono &);
+void LiberarMemoria(Poligono &);
 
 //funciones
 void AgregarColorpol(Poligono &p, Color c){
@@ -71,7 +84,6 @@ void AddVertice(Poligono &pol, Punto p){
 	pol.ppunto=nuevo;		
 	++pol.nvertices;
 }
-
 
 void SetVertice(Poligono &p, unsigned v, Punto point){
 	unsigned i=0;
@@ -102,27 +114,66 @@ void RemoveVertice(Poligono &p){
 }
 
 unsigned GetCantidadLados(const Poligono &p){
-	NodoPto *aux = p.ppunto;
-	unsigned i=0;
-    while (aux != nullptr)
-    {
-        ++i;
-		aux = aux->nextpto;
-    }
-	return i;			
+	return p.nvertices;			
 }
 
 float GetPerimetro(const Poligono &p){
 	NodoPto *aux = p.ppunto;
-	NodoPto  *aux2=p.ppunto->nextpto;
+	unsigned i=1;
 	float per=0;
-	while(aux !=nullptr and aux2 != nullptr){
-		per=per+GetHip(aux->pto, aux2->pto);
+	while(i<p.nvertices){
+		per=per+GetHip(aux->pto, aux->nextpto->pto);
 		aux=aux->nextpto;
-		aux2=aux2->nextpto;
+		++i;
 	}
 	per= per+ GetHip(aux->pto, p.ppunto->pto);		//distancia del ultimo pto con el inicial
+	cout<<per<<" "<<aux->pto.x<<" "<<p.ppunto->pto.x<<endl;
 	return per;
+}
+
+bool ExtraerPoligono(ifstream &in, Poligono & p){
+	bool aux=true;
+	char carac;
+	while ( carac != '#' and carac!='|')//#
+	{
+		aux=ExtraerColor(in, p.colr);
+		aux=ExtraerPuntos(in, p);
+		in>>carac;
+	}
+	return bool(in);
+}
+
+void CopiarPoligonosConPerimetrosMayoresA(double per, string polinput, string poloutput){
+	ifstream in(polinput);
+	ofstream out(poloutput);
+	double perpol;
+	bool flag;
+	char carac;
+	Poligono p;
+	while (carac !='#')
+	{
+		flag=ExtraerPoligono(in,p);
+		perpol=GetPerimetro(p);
+		if (perpol > per)
+		{
+			SalidaPoligono(out,p);
+		}
+		LiberarMemoria(p);
+		in>>carac;
+	}
+	in.close();
+	out.close();
+}
+
+void BorrarPoligono(Poligono &p){
+	NodoPto *aux = p.ppunto;
+	while (aux != nullptr)
+	{
+		p.ppunto = aux->nextpto;
+		delete aux;
+		--p.nvertices;
+		aux=p.ppunto;
+	}
 }
 
 bool ExtracSalPoligono(ifstream &in, ofstream &out, Poligono &p, float per){
@@ -160,20 +211,21 @@ bool ExtracSalPoligono(ifstream &in, ofstream &out, Poligono &p, float per){
 }
 
 bool ExtraerPuntos(ifstream &in, Poligono &pol){
-	unsigned i;
+	Punto point;
 	char carac;
-	NodoPto *aux = pol.ppunto;
-	in>>pol.nvertices;
-	in>>carac;								//{
+	unsigned i;
+	in>>i;
+	in>>carac;							
 	if(carac =='{'){
-		while (aux != nullptr and carac != '}'){
-			in>>aux->pto.x;	
+		while (carac != '}'){
+			in>>point.x;
 			in>>carac;
-			in>>aux->pto.y;
+			in>>point.y;
+			AddVertice(pol,point);
 			in>>carac;
-			aux = aux->nextpto;
 		}
 	}
+	pol.nvertices=i;
 	return bool(in);
 }
 
@@ -209,5 +261,14 @@ void SalidaColor(ofstream &out, Color c){
 
 void SalidaPunto(ofstream &out, Punto &p){
 	out <<" ("<<p.x<< ","<< p.y<< ")" ;
+}
 
+void LiberarMemoria(Poligono &p){
+	unsigned i=0;
+	while (i<p.nvertices)
+	{
+		delete p.ppunto;
+		++i;
+	}
+	
 }

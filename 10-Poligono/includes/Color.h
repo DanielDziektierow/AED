@@ -5,7 +5,18 @@
 *Apellido: Dziektierow
 *Nombre: Daniel
 */
+#pragma once
+/*
+// Foo.h
+#ifndef FOO_H_INCLUDED 
+#define FOO_H_INCLUDED
 
+class Foo    //  a class definition
+{
+};
+
+#endif
+*/
 #include <iostream>
 #include <cassert>
 #include <string>
@@ -202,6 +213,3 @@ bool isIgual(const Color &c1, const Color &c2){
 	}
 	else return false;
 }
-
-
-

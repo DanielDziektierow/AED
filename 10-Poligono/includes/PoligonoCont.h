@@ -5,7 +5,7 @@
 #include <fstream>
 #include <array>
 #include <vector>
-#include "C:\Users\DanielDziektierow\Documents\AED\11-Punto\Punto.h"
+#include "Punto.h"
 #include "Color.h"
 
 using namespace std;
@@ -38,12 +38,12 @@ bool ExtracSalPoligono(ifstream &, ofstream &, Poligono &, float);
 bool ExtraerPuntos(ifstream &, Poligono &);
 bool ExtraerColor(ifstream &, Color &);
 bool ExtraerPoligono(ifstream&, Poligono&);
-
+void CopiarPoligonosConPerimetrosMayoresA(double,string,string);
 
 void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
-void CopiarPoligonosConPerimetrosMayoresA(double,string,string);
+
 void AgregarColorpol(Poligono &);
 void MostrarColorPol(const Poligono &);
 void LiberarMemoria(Poligono &);
@@ -167,7 +167,7 @@ bool ExtraerColor(ifstream &in, Color &c){
 }
 
 void SalidaPoligono(ofstream &out, Poligono &pol){
-	unsigned i=0;			//Poligonos.size no tiene en cuenta el 0
+	unsigned i=0;			
 	out<<"{";
 	SalidaColor(out, pol.colr);
 	while (i < pol.nvertices){
@@ -204,7 +204,8 @@ void CopiarPoligonosConPerimetrosMayoresA(double per,string polinput,string polo
 		LiberarMemoria(p);
 		in>>carac;
 	}
-	
+	in.close();
+	out.close();
 	//for(Poligono p; flag=ExtraerPoligono(in,p);){
 	//	SalidaPoligono(out, p);	
 	//}

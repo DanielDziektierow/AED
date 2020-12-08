@@ -5,12 +5,16 @@
 - **Transcripcion del problema:** Desarrollar el tipo de dato Polígono que representa polígonos con color en el
 plano. Las operaciones son: AddVértice, GetVértice, SetVértice, RemoveVértice,
 GetCantidadLados, y Get_GetPerímetro.
+Desarrollar la estructura Color para usarla en el Poligono. Las operaciones son: Mezclar, GetHtmlRGB, GetHtmlHex, Sumar, Restar, GetComplementario, DecaHex, isIgual, CrearSVG.
+Además, que contenga un dato de tipo punto donde se van a guardar los puntoss del poligono.
+Tambien, se debera extraer una cantidad ilimitada de poligonos de un flujo de datos y enviarlos en otro.
+Este poligono debe estar dividido en 2 partes, la primera tener un poligono que se pueda agregar puntos ilimitados, con un máximo. La segunda tener un poligono que agregue puntos ilimitadamente, pero en una lista enlazada.
 
 - **Restriccion del problema**
 Las pruebas deben realizarse con assert, sin usar cin ni cout.
 
 - **Hipotesis del problema**
-Para armar la estructura de Poligono previamente voy a armar una estructura llamada punto que contenga 2 doubles (modificable) para el punto en x e y.
+Para armar la estructura de Poligono previamente voy a armar una estructura llamada punto que contenga 2 float(modificable) para el punto en x e y.
 Para crear poligono con sus vertices y un  color, voy a tener en cuenta de agregar una variable que me diga la cantidad de vertices del poligono y agregar un array de los puntos del poligono. Ademas, voy añadir el header Color.h para tener habilitado el tipo de varible Color que habimos creado en la antigua carpeta. 
 
 <!-- - **Modelo IPO**
