@@ -1,15 +1,14 @@
-#include <iostream>
-#include <cassert>
-#include <cstdio>
-#include <string>
-#include <fstream>
-#include <array>
-#include <vector>
-#include "Punto.h"
+/*Materia: Algoritmos y Estructura de Datos
+*Curso: K1051
+*Anio y Cuatrimestre: 2020 1er Cuat.
+*Legajo: 1599872
+*Apellido: Dziektierow
+*Nombre: Daniel
+*/
+#ifndef POLIGONOCONT_H
+#define POLIGONOCONT_H
 #include "Color.h"
-
-using namespace std;
-
+#include "Punto.h"
 //const
 const unsigned MAX=3;
 const unsigned MAX_PTOS=10;
@@ -215,3 +214,5 @@ void CopiarPoligonosConPerimetrosMayoresA(double per,string polinput,string polo
 
 void LiberarMemoria(Poligono &p){
 }
+
+#endif

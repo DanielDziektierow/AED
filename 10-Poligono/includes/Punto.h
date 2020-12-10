@@ -5,18 +5,21 @@
 *Apellido: Dziektierow
 *Nombre: Daniel
 */
-
+#ifndef PUNTO_H
+#define PUNTO_H
+#include <cmath>
 #include <iostream>
-#include <cassert>
 #include <string>
 #include <array>
-#include <cmath>
+#include <cstdint>
+#include <fstream>
+#include <cstdio>
 
 using namespace std;
-
 //Constantes
 #define PI 3.14159265
 
+//Estructura
 struct Punto{
 	float x, y;
 };
@@ -26,15 +29,4 @@ struct Punto{
 float GetHip(Punto, Punto);
 void MoverPunto(Punto &, int, int);
 
-//funciones
-
-float GetHip(Punto primer, Punto segundo){
-	float hip;
-	hip=sqrt(pow((segundo.x - primer.x),2)+pow((segundo.y - primer.y),2));
-	return hip;
-}
-
-void MoverPunto(Punto & p, int x, int y){
-	p.x=p.x + x;
-	p.y= p.y + y;
-}
+#endif

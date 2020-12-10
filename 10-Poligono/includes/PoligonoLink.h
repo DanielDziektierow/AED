@@ -5,31 +5,10 @@
 *Apellido: Dziektierow
 *Nombre: Daniel
 */
-
-//Tarea: leer los poligonos desde el out
-//#pragma once
-/*
-
-// Foo.h
-#ifndef FOO_H_INCLUDED 
-#define FOO_H_INCLUDED
-
-class Foo    //  a class definition
-{
-};
-
-#endif
-*/
-
-#include <iostream>
-#include <cassert>
-#include <cstdio>
-#include <string>
-#include <fstream>
-#include <array>
-#include "Punto.h"
+#ifndef POLIGONOLINK_H
+#define POLIGONOLINK_H
 #include "Color.h"
-
+#include "Punto.h"
 
 struct NodoPto{
 	Punto pto;
@@ -272,3 +251,5 @@ void LiberarMemoria(Poligono &p){
 	}
 	
 }
+
+#endif
