@@ -1,13 +1,19 @@
 all:  Filtrar
 
-Filtrar:  Filtrar.o Color.o ColorTest.o Punto.o PuntoTest.o PoligonoCont.o
-	g++  Filtrar.o Color.o ColorTest.o Punto.o PuntoTest.o PoligonoCont.o -o Filtrar
+Filtrar:  Filtrar.o Color.o ColorTest.o Punto.o PuntoTest.o PoligonoCont.o PoligonoCTest.o
+	g++  Filtrar.o Color.o ColorTest.o Punto.o PuntoTest.o PoligonoCont.o PoligonoCTest.o -o Filtrar
 
 PoligonoLink.o: PoligonoLink.cpp 
 	g++ -c PoligonoLink.cpp
 
+PoligonoLTest.o: PoligonoLTest.cpp
+	g++ -c PoligonoLTest.cpp
+
 PoligonoCont.o: PoligonoCont.cpp 
 	g++ -c PoligonoCont.cpp
+
+PoligonoCTest.o: PoligonoCTest.cpp
+	g++ -c PoligonoCTest.cpp
 
 Color.o: Color.cpp 
 	g++ -c Color.cpp

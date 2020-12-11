@@ -43,7 +43,7 @@ void SalidaPoligono(ofstream &, Poligono &);
 void SalidaPunto(ofstream &, Punto &);
 void SalidaColor(ofstream &, Color &);
 
-void AgregarColorpol(Poligono &);
+void AgregarColorpol(Poligono &, Color);
 void MostrarColorPol(const Poligono &);
 void LiberarMemoria(Poligono &);
 
