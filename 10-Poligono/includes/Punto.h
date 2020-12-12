@@ -28,5 +28,12 @@ struct Punto{
 
 float GetHip(Punto, Punto);
 void MoverPunto(Punto &, int, int);
+Punto SumarPuntos(const Punto&, const Punto&);
+void MostrarPunto(const Punto&);
+unsigned GetCuadrante(const Punto&);
+Punto RestarPuntos(const Punto&, const Punto&);
+double GetDistancia(const Punto&, const Punto&);
+double GetDistanciaAlOrigen (const Punto&);
+
 
 #endif
