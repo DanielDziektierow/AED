@@ -15,12 +15,12 @@ const unsigned MAX_PTOS=10;
 
 
 //declaro structs
-using nPtos= std::array<Punto,MAX_PTOS>;
+using ListaDeVertices= std::array<Punto,MAX_PTOS>;
 
 
 struct Poligono{
 	unsigned nvertices;
-	nPtos npto;
+	ListaDeVertices npto;
 	Color colr;
 	};
 	
@@ -33,7 +33,7 @@ void RemoveVertice(Poligono&);
 unsigned GetCantidadLados(const Poligono &); 
 float GetPerimetro(const Poligono &);
 
-bool ExtracSalPoligono(ifstream &, ofstream &, Poligono &, float);
+//bool ExtracSalPoligono(ifstream &, ofstream &, Poligono &, float);
 bool ExtraerPuntos(ifstream &, Poligono &);
 bool ExtraerColor(ifstream &, Color &);
 bool ExtraerPoligono(ifstream&, Poligono&);

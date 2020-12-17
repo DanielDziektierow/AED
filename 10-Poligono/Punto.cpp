@@ -33,9 +33,9 @@ std::cout <<"(" <<p.x <<";" <<p.y <<")" <<"; ";
 
 unsigned GetCuadrante(const Punto& p){
     if (p.x > 0 and p.y > 0) return 1;
-     if (p.x < 0 and p.y > 0) return 2;
-         if (p.x < 0 and p.y < 0) return 3;
-             if (p.x > 0 and p.y < 0) return 4;
+    if (p.x < 0 and p.y > 0) return 2;
+    if (p.x < 0 and p.y < 0) return 3;
+    if (p.x > 0 and p.y < 0) return 4;
 }
 
 Punto RestarPuntos(const Punto& pa, const Punto& pb){
